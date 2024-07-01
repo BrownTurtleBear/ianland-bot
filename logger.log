@@ -1,4 +1,0 @@
-Shard ID None is requesting privileged intents that have not been explicitly enabled in the developer portal. It is recommended to go to https://discord.com/developers/applications/ and explicitly enable the privileged intents within your application's page. If this is not possible, then consider disabling the privileged intents instead.
-id parameter must be convertible to int not <class 'str'>
-id parameter must be convertible to int not <class 'str'>
-id parameter must be convertible to int not <class 'str'>
