@@ -17,7 +17,7 @@ class Client(commands.Bot):
         self.logger = logging.getLogger("logger")
         self.logger.addHandler(logging.FileHandler("logger.log"))
         self.logger.setLevel(logging.DEBUG)
-        self.session = None  # We'll create the session in setup_hook
+        self.session = None
 
     async def on_ready(self):
         try:
@@ -31,14 +31,14 @@ class Client(commands.Bot):
         await self.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="to help"))
 
     async def setup_hook(self):
-        self.session = aiohttp.ClientSession()  # Create the session
+        self.session = aiohttp.ClientSession()
         for ext in self.coglist:
             await self.load_extension(ext)
 
     async def close(self):
         await super().close()
         if self.session:
-            await self.session.close()  # Close the session when the bot is closing
+            await self.session.close()
 
 
 client = Client()
