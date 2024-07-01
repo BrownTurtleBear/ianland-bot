@@ -8,3 +8,30 @@ connector: <aiohttp.connector.TCPConnector object at 0x0000027BC62FB350>
 INFO:discord.client:logging in using static token
 INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 6907cf2755bb8556dbbbc783299cd92f).
 ERROR:logger:id parameter must be convertible to int not <class 'str'>
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: b7495d5e79c973de289a1901c0c00d2c).
+ERROR:logger:id parameter must be convertible to int not <class 'str'>
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 3fc19c9258ed7847d3c9dd449752d128).
+ERROR:discord.app_commands.tree:Ignoring exception in command 'github'
+Traceback (most recent call last):
+  File "C:\Users\The Ts\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\discord\app_commands\commands.py", line 850, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\The Ts\OneDrive - Department for Education\Personal\Documents\Coding\Bots\Ianland\cogs\commands.py", line 15, in github
+    github_embed.set_thumbnail(url=self.client.user.avatar.url)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'url'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\The Ts\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\discord\app_commands\tree.py", line 1240, in _call
+    await command._invoke_with_namespace(interaction, namespace)
+  File "C:\Users\The Ts\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\discord\app_commands\commands.py", line 876, in _invoke_with_namespace
+    return await self._do_call(interaction, transformed_values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\The Ts\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\discord\app_commands\commands.py", line 869, in _do_call
+    raise CommandInvokeError(self, e) from e
+discord.app_commands.errors.CommandInvokeError: Command 'github' raised an exception: AttributeError: 'NoneType' object has no attribute 'url'
+ERROR:logger:id parameter must be convertible to int not <class 'str'>

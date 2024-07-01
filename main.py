@@ -12,7 +12,7 @@ token = os.getenv('DISCORD_BOT_TOKEN')
 class Client(commands.Bot):
     def __init__(self):
         super().__init__(command_prefix="?", intents=discord.Intents().all())
-        self.coglist = []
+        self.coglist = ["cogs.commands"]
         self.logger = logging.getLogger("logger")
         self.logger.addHandler(logging.FileHandler("logger.log"))
         self.logger.setLevel(logging.DEBUG)
