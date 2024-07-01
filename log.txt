@@ -1,0 +1,10 @@
+INFO:discord.client:logging in using static token
+ERROR:logger:Shard ID None is requesting privileged intents that have not been explicitly enabled in the developer portal. It is recommended to go to https://discord.com/developers/applications/ and explicitly enable the privileged intents within your application's page. If this is not possible, then consider disabling the privileged intents instead.
+ERROR:asyncio:Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x0000027BC62FB450>
+ERROR:asyncio:Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x0000027BC62C8E50>, 117370.578)]']
+connector: <aiohttp.connector.TCPConnector object at 0x0000027BC62FB350>
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 6907cf2755bb8556dbbbc783299cd92f).
+ERROR:logger:id parameter must be convertible to int not <class 'str'>
