@@ -1,3 +1,6 @@
+#My secret keys
 .env
+
+#logs (errors and testing)
 log.txt
 logger.log
