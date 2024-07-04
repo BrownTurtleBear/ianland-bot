@@ -4,3 +4,7 @@
 #logs (errors and testing)
 log.txt
 logger.log
+
+#private stuff
+appreciations.json
+saved_appreciations.json

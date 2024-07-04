@@ -8,16 +8,18 @@ import aiohttp
 
 load_dotenv()
 token = os.getenv('DISCORD_BOT_TOKEN')
+tenor_api_key = os.getenv('TENOR_TOKEN')
 
 
 class Client(commands.Bot):
     def __init__(self):
         super().__init__(command_prefix="?", intents=discord.Intents().all())
-        self.coglist = ["cogs.commands", "cogs.appreciation"]
+        self.coglist = ["cogs.commands", "cogs.appreciation", "cogs.random_gif"]
         self.logger = logging.getLogger("logger")
         self.logger.addHandler(logging.FileHandler("logger.log"))
         self.logger.setLevel(logging.DEBUG)
         self.session = None
+        self.tenor_api_key = tenor_api_key
 
     async def on_ready(self):
         try:
@@ -34,6 +36,7 @@ class Client(commands.Bot):
         self.session = aiohttp.ClientSession()
         for ext in self.coglist:
             await self.load_extension(ext)
+        await self.tree.sync()
 
     async def close(self):
         await super().close()
