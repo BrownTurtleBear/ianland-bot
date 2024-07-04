@@ -1,1 +1,3 @@
-# ianland-bot
+# Duckmin
+
+The bot to worship Ian
