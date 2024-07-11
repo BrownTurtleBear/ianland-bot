@@ -9,6 +9,8 @@ import random
 
 class Appreciation(commands.Cog):
     def __init__(self, client):
+        self.saved_appreciations = None
+        self.appreciations = None
         self.client = client
         self.appreciations_file = "appreciations.json"
         self.saved_appreciations_file = "saved_appreciations.json"
@@ -65,15 +67,17 @@ class Appreciation(commands.Cog):
         else:
             await interaction.response.send_modal(AppreciationModal(self, guild_id, user_id))
 
-    @app_commands.command(name="show_appreciations", description="Look through the appreciations that someone had today.")
+    @app_commands.command(name="show_appreciations",
+                          description="Look through the appreciations that someone had today.")
     async def show_appreciations(self, interaction: discord.Interaction):
         self.clean_old_appreciations()
         guild_id = str(interaction.guild_id)
         today = self.get_adelaide_date()
 
         if guild_id not in self.appreciations:
-            await interaction.response.send_message("No appreciations have been shared today. I would love to know what you find appreciative today.",
-                                                    ephemeral=True)
+            await interaction.response.send_message(
+                "No appreciations have been shared today. I would love to know what you find appreciative today.",
+                ephemeral=True)
             return
 
         today_appreciations = [v["appreciation"] for v in self.appreciations[guild_id].values() if v["date"] == today]
@@ -144,7 +148,9 @@ class AppreciationModal(discord.ui.Modal, title="Daily Appreciation"):
         self.appreciation_cog.save_appreciations()
 
         await interaction.response.send_message(
-            f"Thanks for sharing your appreciation for today. Have a nice rest of your day and see you tomorrow.", ephemeral=True)
+            f"Thanks for sharing your appreciation for today. Have a nice rest of your day and see you tomorrow.",
+            ephemeral=True)
+
 
 class AppreciationOptionsView(discord.ui.View):
     def __init__(self, appreciation_cog, guild_id, user_id):
@@ -268,11 +274,13 @@ class ShowAppreciationsView(discord.ui.View):
         today = self.appreciation_cog.get_adelaide_date()
 
         if self.guild_id not in self.appreciation_cog.appreciations:
-            await interaction.response.send_message("No appreciations have been shared today. I would love to know what you find appreciative today.",
-                                                    ephemeral=True)
+            await interaction.response.send_message(
+                "No appreciations have been shared today. I would love to know what you find appreciative today.",
+                ephemeral=True)
             return
 
-        today_appreciations = [v["appreciation"] for v in self.appreciation_cog.appreciations[self.guild_id].values() if v["date"] == today]
+        today_appreciations = [v["appreciation"] for v in self.appreciation_cog.appreciations[self.guild_id].values() if
+                               v["date"] == today]
 
         if not today_appreciations:
             await interaction.response.send_message("No appreciations have been shared in this server today.",
@@ -285,6 +293,7 @@ class ShowAppreciationsView(discord.ui.View):
 
         view = AppreciationView(self.appreciation_cog, self.guild_id, self.user_id, today_appreciations, appreciation)
         await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
+
 
 async def setup(client):
     await client.add_cog(Appreciation(client))
