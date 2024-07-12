@@ -297,3 +297,4 @@ class ShowAppreciationsView(discord.ui.View):
 
 async def setup(client):
     await client.add_cog(Appreciation(client))
+    print("- appreciation.py loaded -")

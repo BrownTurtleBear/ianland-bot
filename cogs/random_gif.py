@@ -68,3 +68,4 @@ class GifCog(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(GifCog(bot))
+    print("- random_gif.py loaded -")
