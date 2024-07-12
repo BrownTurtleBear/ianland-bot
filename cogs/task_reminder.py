@@ -120,11 +120,11 @@ class TaskReminder(commands.Cog):
             await channel.send(f"{user.mention}, I couldn't send you a DM. Here are your task reminders:", embed=embed,
                                view=view)
 
-    @app_commands.command(name="delete_task", description="Delete one of your tasks")
+    @app_commands.command(name="remove_task", description="Remove one of your tasks (Good job for finishing it!)")
     async def delete_task(self, interaction: discord.Interaction):
         user_id = str(interaction.user.id)
         if user_id not in self.tasks or not self.tasks[user_id]:
-            await interaction.response.send_message("You have no tasks to delete.", ephemeral=True)
+            await interaction.response.send_message("You have no tasks to remove.", ephemeral=True)
             return
 
         options = [
@@ -133,7 +133,7 @@ class TaskReminder(commands.Cog):
         ]
 
         view = TaskSelectView(self, user_id, options)
-        await interaction.response.send_message("Select a task to delete:", view=view, ephemeral=True)
+        await interaction.response.send_message("Select a task to remove:", view=view, ephemeral=True)
 
 
 class TaskSelectView(discord.ui.View):
@@ -146,7 +146,7 @@ class TaskSelectView(discord.ui.View):
 
 class TaskSelect(discord.ui.Select):
     def __init__(self, options):
-        super().__init__(placeholder="Choose a task to delete", options=options)
+        super().__init__(placeholder="Choose a task to remove", options=options)
 
     async def callback(self, interaction: discord.Interaction):
         view: TaskSelectView = self.view
@@ -160,7 +160,7 @@ class TaskSelect(discord.ui.Select):
 
         add_back_view = AddBackView(view.cog, view.user_id, selected_task)
         await interaction.response.edit_message(
-            content=f"Task '{selected_task['task']}' was deleted.",
+            content=f"Task '{selected_task['task']}' was removed.",
             view=add_back_view
         )
 
@@ -201,7 +201,7 @@ class DeleteTaskView(discord.ui.View):
         self.user_id = user_id
         self.add_item(SelectTask(options))
 
-    @discord.ui.button(label="Confirm Deletion", style=discord.ButtonStyle.danger)
+    @discord.ui.button(label="Confirm Removal", style=discord.ButtonStyle.danger)
     async def confirm(self, interaction: discord.Interaction, button: discord.ui.Button):
         if not hasattr(self, 'selected_task'):
             await interaction.response.send_message("Please select a task first.", ephemeral=True)
@@ -212,18 +212,18 @@ class DeleteTaskView(discord.ui.View):
             del self.cog.tasks[self.user_id]
         self.cog.save_tasks()
 
-        await interaction.response.send_message("Task deleted successfully.", ephemeral=True)
+        await interaction.response.send_message("Task removed successfully.", ephemeral=True)
         self.stop()
 
 
 class SelectTask(discord.ui.Select):
     def __init__(self, options):
-        super().__init__(placeholder="Choose a task to delete", options=options)
+        super().__init__(placeholder="Choose a task to remove", options=options)
 
     async def callback(self, interaction: discord.Interaction):
         view: DeleteTaskView = self.view
         view.selected_task = int(self.values[0])
-        await interaction.response.send_message(f"Task selected. Click 'Confirm Deletion' to remove it.",
+        await interaction.response.send_message(f"Task selected. Click 'Confirm Removal' to remove it.",
                                                 ephemeral=True)
 
 
