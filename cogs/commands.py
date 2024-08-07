@@ -57,7 +57,9 @@ class Commands(commands.Cog):
     @app_commands.command(name="repo", description="The link to the bots repo")
     async def repo(self, interaction: discord.Interaction):
         link = "https://github.com/BrownTurtleBear/ianland-bot"
-        github_embed = discord.Embed(title="Link to Duckmin's repo", description="See how the bot works on the repo!\nAll suggestions are wellcome.", url=link, colour=self.colour)
+        github_embed = discord.Embed(title="Link to Duckmin's repo",
+                                     description="See how the bot works on the repo!\nAll suggestions are wellcome.",
+                                     url=link, colour=self.colour)
         github_embed.set_thumbnail(url=self.client.user.avatar.url)
         await interaction.response.send_message(embed=github_embed)
 

@@ -14,7 +14,7 @@ tenor_api_key = os.getenv('TENOR_TOKEN')
 class Client(commands.Bot):
     def __init__(self):
         super().__init__(command_prefix="?", intents=discord.Intents().all())
-        self.coglist = ["cogs.commands", "cogs.appreciation", "cogs.random_gif", "cogs.task_reminder"]
+        self.coglist = ["cogs.commands", "cogs.appreciation", "cogs.random_gif", "cogs.task_reminder", "cogs.pikmin"]
         self.logger = logging.getLogger("logger")
         self.logger.addHandler(logging.FileHandler("logger.log"))
         self.logger.setLevel(logging.DEBUG)
